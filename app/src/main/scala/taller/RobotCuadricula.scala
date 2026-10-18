@@ -112,7 +112,7 @@ class RobotCuadricula {
     case Girar(_) => f(o)
     case Repetir(veces, orden) => Repetir(veces, transformar(orden, f))
     case Secuencia(ordenes) => Secuencia(ordenes.map(x => transformar(x, f)))
-    
+
   }
 
     
@@ -120,5 +120,42 @@ class RobotCuadricula {
   // Punto 5 -------------------------------------------------------------------
 
   /** Una orden equivalente más corta, con las reglas del enunciado. */
-  def simplificar(o: Orden): Orden = ???
+  def simplificar(o: Orden): Orden = {
+
+    def juntar(lista: List[Orden]): List[Orden] = lista match {
+
+      case Avanzar(a) :: Avanzar(b) :: resto => juntar(Avanzar(a + b) :: resto)
+      case Nil => Nil
+      case primera :: resto => primera :: juntar(resto)
+
+    }
+
+    o match {
+
+      case Avanzar(0) => Secuencia(Nil)
+      case Avanzar(_) => o
+      case Girar(_) => o
+      case Repetir(veces, _) if veces <= 0 => Secuencia(Nil)
+      case Repetir(1, orden) => simplificar(orden)
+      case Repetir(veces, orden) => simplificar(orden) match {
+
+        case Secuencia(Nil) => Secuencia(Nil)
+        case interior => Repetir(veces, interior)
+
+      }
+
+      case Secuencia(ordenes) =>
+        val simples = ordenes.map(x => simplificar(x)).filter(x => x != Secuencia(Nil))
+        juntar(simples).filter(x => x != Avanzar(0)) match {
+
+          case Nil => Secuencia(Nil)
+          case unica :: Nil => unica
+          case varias => Secuencia(varias)
+
+        }
+
+    }
+
+  }
+  
 }
