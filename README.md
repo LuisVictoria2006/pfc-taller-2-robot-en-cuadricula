@@ -16,7 +16,7 @@ la nota.
 
 | Nombre completo | Código |
 |---|---|
-| | |
+| Luis Angel Victoria Garcia | 2459529 |
 | | |
 | | |
 | | |
