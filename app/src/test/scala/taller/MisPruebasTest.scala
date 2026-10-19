@@ -112,7 +112,7 @@ class MisPruebasTest extends AnyFunSuite {
 
   }
 
-  test("profundidad: dos Repetir anidados dentro de una secuencia tienen 4") {
+  test("profundidad: dos repetir anidados dentro de una secuencia tienen 4") {
 
     assert(profundidad(Secuencia(List(Repetir(2, Repetir(2, Girar(Derecha)))))) == 4)
 
@@ -132,7 +132,7 @@ class MisPruebasTest extends AnyFunSuite {
 
   }
 
-  test("rutina: construye el Repetir con la secuencia esperada") {
+  test("rutina: construye el repetir con la secuencia esperada") {
 
     assert(rutina(2)(Izquierda)(1) == Repetir(1, Secuencia(List(Avanzar(2), Girar(Izquierda)))))
 
@@ -186,7 +186,7 @@ class MisPruebasTest extends AnyFunSuite {
 
   }
 
-  // Punto 5 - simplificar
+  // Punto 5 - Simplificar
 
   test("simplificar: una basica no cambia") {
 
@@ -228,7 +228,7 @@ class MisPruebasTest extends AnyFunSuite {
 
   }
 
-  test("simplificar: una orden con Repetir termina en el mismo estado") {
+  test("simplificar: una orden con repetir termina en el mismo estado") {
 
     val o = Secuencia(List(
       Repetir(2, Secuencia(List(Avanzar(1), Avanzar(1), Girar(Izquierda)))),
